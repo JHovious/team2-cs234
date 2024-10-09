@@ -1,1 +1,3 @@
-
+- Inventory Class
+- Staff Class Methods
+- Store Info Class Methods
