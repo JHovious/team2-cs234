@@ -1,0 +1,7 @@
+Created overall class shapes
+Customer class
+Purchase history subclass
+Rewards subclass
+Store info class except data types
+Manager class
+Ticket class
