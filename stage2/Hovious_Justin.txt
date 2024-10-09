@@ -1,0 +1,20 @@
+Hovious_Justin
+
+Created and filled out the following classes and variables:  Schedule, User Menu, Login, Store.
+
+Created the variables for the Staff class.
+
+Managed all scheduling and coordination for weekly progress meetings held each Tuesday.
+
+Tracked progress and sent weekly update reports via teams using the built in planner app. 
+
+
+
+
+
+
+
+
+
+
+
