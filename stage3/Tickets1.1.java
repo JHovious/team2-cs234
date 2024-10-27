@@ -15,6 +15,7 @@ public class Tickets {
     private boolean choice;
     private int option;
     private ArrayList<TicketDB> ticketsDB;
+    private TicketDB num1;
     
     //Constructor
     public Tickets(){
@@ -22,6 +23,7 @@ public class Tickets {
         option = 9; //default number
         //create an array list for tickets objects
         ticketsDB = new ArrayList<TicketDB>();
+        num1 = new TicketDB(ticketsDB);
     }
     
     //Method showTicketMenu
@@ -41,10 +43,17 @@ public class Tickets {
             switch(option){
                 case 1:
                     System.out.println("Test for create ticket complete");
+                    
                     choice = true;
                     break;
                 case 2:
-                    System.out.println("Test for read ticket complete");
+                    //Need input for to get ticket number
+                    
+                    System.out.println("Ticket Priority: " + num1.getTicketPriority());
+                    System.out.println("Ticket Recipient: " + num1.getTicketRecipient());
+                    System.out.println("Ticket Subject: " + num1.getTicketSubject());
+                    System.out.println("Ticket Message: " + num1.getTicketMessage());
+                    
                     choice = true;
                     break;
                 case 3:
