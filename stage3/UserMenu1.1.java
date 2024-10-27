@@ -38,7 +38,8 @@ public class UserMenu {
             option = sc.nextInt();
             
             switch(option){
-                case 1:
+                case 1: 
+
                     aTicket.showTicketMenu();
                     break;
 //                case 2:
