@@ -11,6 +11,7 @@ public class UserMenu {
     private int option;
     private boolean choice;
     
+
     
     //Constructor
     public UserMenu(){
@@ -21,7 +22,7 @@ public class UserMenu {
     }
     
     
-    public void showOption(){
+    public void showOption(Tickets aTicket){
         
         do{
             System.out.println("======Hardware Store User Menu======");
@@ -35,10 +36,10 @@ public class UserMenu {
             System.out.print("Enter your choice: ");
             Scanner sc = new Scanner(System.in);
             option = sc.nextInt();
+            
             switch(option){
-                case 1: 
-                    System.out.println("Test complete");
-                    //Tickets();
+                case 1:
+                    aTicket.showTicketMenu();
                     break;
 //                case 2:
 //                case 3:
