@@ -4,6 +4,7 @@ import java.util.Scanner;
 /**
  *
  * Christian Kurdi
+ * Version 1.1
  */
 public class UserMenu {
     
