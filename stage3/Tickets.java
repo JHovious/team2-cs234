@@ -2,11 +2,13 @@
 
 /**
  *
- * Christian Kurdi
- * Version 1.1
+ *Christian Kurdi
+ * Version: 1.3
  */
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import java.util.Scanner;
 
 //I set it up so this class only shows the menu and creates the array list of tickets
@@ -15,50 +17,99 @@ public class Tickets {
     // Instance Variables
     private boolean choice;
     private int option;
-    private ArrayList<TicketDB> ticketsDB;
-    private TicketDB num1;
+    private Integer ticketNum;
+    private TicketDB newTicket;
+    private HashMap<Integer,TicketDB> tickets;
+    private Scanner sc;
     
     //Constructor
     public Tickets(){
         choice = true;
         option = 9; //default number
-        //create an array list for tickets objects
-        ticketsDB = new ArrayList<TicketDB>();
-        num1 = new TicketDB(ticketsDB);
+       
+        ticketNum = 1;
+        newTicket = new TicketDB();
+        //create a Hash Map for tickets objects
+        tickets = new HashMap<>();
+    }
+    //Constructor 2
+    public Tickets(Integer aTicket){
+        choice = true;
+        option = 9;
+        ticketNum = aTicket;
     }
     
     //Method showTicketMenu
     public void showTicketMenu(){
-        
         do{
             System.out.println("------Ticket Menu------");
             System.out.println("1. Create a Ticket");
             System.out.println("2. Read a Ticket");
             System.out.println("3. Update a Ticket");
             System.out.println("4. Return to Main Menu");
-            System.out.println("Enter your choice: ");
+            System.out.print("Enter your choice: ");
             
-            Scanner sc = new Scanner(System.in);
+            sc = new Scanner(System.in);
             option = sc.nextInt();
             
             switch(option){
                 case 1:
-                    System.out.println("Test for create ticket complete");
+                    System.out.println("Testing for create ticket");
+                    newTicket = new TicketDB();
+                    newTicket.createTicketSubject();
+                    newTicket.createTicketPriority();
+                    newTicket.createTicketRecipient();
+                    newTicket.createTicketMessage();
                     
+                    //Need to generate new number/Key
+                    ticketNum = ticketNum + 1;
+                    tickets.put(ticketNum, newTicket);
+                    System.out.println("Ticket created successfully. The ticket number is " + ticketNum);
                     choice = true;
                     break;
-                case 2:
-                    //Need input for to get ticket number
                     
-                    System.out.println("Ticket Priority: " + num1.getTicketPriority());
-                    System.out.println("Ticket Recipient: " + num1.getTicketRecipient());
-                    System.out.println("Ticket Subject: " + num1.getTicketSubject());
-                    System.out.println("Ticket Message: " + num1.getTicketMessage());
+                    
+                    
+                    
+                case 2:
+                    System.out.print("Enter the ticket number: ");
+                    Integer lookUp = sc.nextInt();
+                    //Need to verify if key exists in map
+                    String priority = tickets.get(lookUp).getTicketPriority();
+                    String recipient = tickets.get(lookUp).getTicketRecipient();
+                    String subject = tickets.get(lookUp).getTicketSubject();
+                    String message = tickets.get(lookUp).getTicketMessage();
+                    System.out.println("Ticket Priority: " + priority);
+                    System.out.println("Ticket Recipient: " + recipient);
+                    System.out.println("Ticket Subject: " + subject);
+                    System.out.println("Ticket Message: " + message);
                     
                     choice = true;
                     break;
                 case 3:
-                    System.out.println("Test for update ticket complete");
+                    System.out.println("Testing for update");
+                    System.out.print("Enter the ticket number: ");
+                    Integer lookUp2 = sc.nextInt();
+                    System.out.println("Enter 1 to Update Subject");
+                    System.out.println("Enter 2 to Update Message");
+                    Integer lookUp3 = sc.nextInt();
+                    if(lookUp3 == 1){
+                        System.out.print("Caution!! Old Subject will be erased!! Enter 1 to accent and continue: ");
+                        Integer lookUp5 = sc.nextInt();
+                        if(lookUp5 == 1){
+                            tickets.get(lookUp2).createTicketSubject();
+                        } else{
+                            System.out.println("Returning to Ticket Menu");
+                        }
+                    } else if(lookUp3 == 2){
+                        System.out.print("Caution!! Old message will be erased!! Enter 1 to accept and continue : ");
+                        Integer lookUp4 = sc.nextInt();
+                        if(lookUp4 == 1){
+                            tickets.get(lookUp2).createTicketMessage();
+                        } else{
+                            System.out.println("Returning to Ticket Menu");
+                        }
+                    }
                     choice = true;
                     break;
                 case 4:
