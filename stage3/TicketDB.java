@@ -3,7 +3,7 @@
 /**
  *
  * Christian Kurdi
- * Needs: like everything for changes
+ * Needs: 
  * Version: 1.2
  */
 
