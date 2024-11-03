@@ -32,12 +32,7 @@ public class Tickets {
         //create a Hash Map for tickets objects
         tickets = new HashMap<>();
     }
-    //Constructor 2
-    public Tickets(Integer aTicket){
-        choice = true;
-        option = 9;
-        ticketNum = aTicket;
-    }
+  
     
     //Method showTicketMenu
     public void showTicketMenu(){
