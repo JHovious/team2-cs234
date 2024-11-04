@@ -1,7 +1,11 @@
 import java.util.Scanner;
 
+/**
+ * Method prints all employee info when selected in UserMenu.
+ * @author Justin Hovious
+ */
 public class Staff {
-
+   //Instantiates instance variables. Will be changed to read from employee list later.
     private String employeeName = "John Doe";
     private String employeeId = "001";
     private String hireDate = "2022-01-01";
@@ -29,7 +33,8 @@ public class Staff {
         System.out.println(" ");
         System.out.println("Enter '0' to return to the main menu.");
         String input = scanner.nextLine();
-        
+            
+        //Loop to prevent user from being sent back to main menu before exiting.
         if (input.equals("0")) {
             exit = true;
         } else {
