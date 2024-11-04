@@ -45,7 +45,11 @@ public class UserMenu {
                     break;
 //                case 2:
 //                case 3:
-//                case 4:
+                case 4:
+                    System.out.println("Staff Menu");
+                    Staff staff = new Staff();
+                    staff.showStaffInfo();
+                    break;
 //                case 5:
 //                case 6:
                 case 7: System.out.println("Exiting program, goodbye!"); 
