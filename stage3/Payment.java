@@ -1,5 +1,4 @@
 
-
 public class Payment {
 
     private float total;
@@ -8,6 +7,11 @@ public class Payment {
     private String rewardsLookup;
     private float tax;
 
+
+    /*
+     * Constructor
+     * @param float total, String selectPayment, String customerLookup, String rewardsLookup, float tax
+     */
     public Payment(float total, String selectPayment, String customerLookup, String rewardsLookup, float tax) {
         this.total = total;
         this.selectPayment = selectPayment;
@@ -18,24 +22,34 @@ public class Payment {
 
 
     /*
-     * work in progress
+     * returns the rewards status of the customer.
+     * @return rewardsLookup
      */
     public String getRewards() {
         return rewardsLookup;
     }
 
-     /*
-      * work in progress
+    
+    /*
+     * changes the value of rewardsLookup to "Enrolled"
      */
-
     public void rewardsEnroll() {
         rewardsLookup = "Enrolled";
     }
 
+
+    /*
+     * Returns the total
+     * @return float total
+     */
     public float getTotal() {
         return total;
     }
 
+    /*
+     * Prints the total and returns the total.
+     * @return float total
+     */
     public float showTotal() {
         System.out.println("Total: $" + total);
         return total;
@@ -43,7 +57,8 @@ public class Payment {
 
 
     /*
-     * checks if the payment type is cash or card.
+     * Prints the payment type. checks whether the payment type is card or cash. 
+     * If neither is selected, an error message is printed.
      */
     public void getPayment() {
         System.out.println("Payment type: " + selectPayment);
@@ -62,7 +77,10 @@ public class Payment {
 
 
         /*
-         * verifies a correct payment was recieved.
+         * Verifies if the payment type is either card or cash.
+         * If the payment type is valid paymentVerification is true, otherwise it is false.
+         * @param String selectPayment
+         * @return boolean paymentVerifiaction
          */
     public boolean verifyPayment(String selectPayment) {
         boolean  paymentVerification = false;
@@ -73,7 +91,8 @@ public class Payment {
 
     }
     /*
-     * generates a random 6-digit transaction number.
+     * Creates a random 6-digit transaction number and stores it in transactionNumber.
+     * @return String transactionNumber
      */
     public String generateTransactionNumber() {
         int transactionNumber =  (int) (100000 + Math.random() * 900000);
