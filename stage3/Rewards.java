@@ -8,6 +8,10 @@ public class Rewards {
     private short rewardPointMax;
     private ArrayList<String> rewardsDataBase;
 
+    /*
+     * Consructor
+     * @param String rewardNumber, short rewardPoint, short rewardPointMax,ArrayList<String> rewardsDataBase
+     */
     public Rewards(String rewardNumber, short rewardPoint, short rewardPointMax,ArrayList<String> rewardsDataBase) {
         this.rewardNumber = rewardNumber;
         this.rewardPoint = rewardPoint;
@@ -17,11 +21,14 @@ public class Rewards {
     }
 
 
-    /*
-     * creates a random 5 digit number and adds it to rewardsDataBase.
-     */
+
 
     private short nextRewardNumber = 1;
+    /*
+     * Creates a 5-digit formatted number using nextRewaardNumber.
+     * Adds the formattedRewardNumber to the RewardsDatabase and increments nextRewardNumber.
+     * @return rewardsDatabase
+     */
     public ArrayList<String> createRewardNumber() {
         String formattedRewardNumber = String.format("%05d", nextRewardNumber);
         rewardsDataBase.add(formattedRewardNumber);
@@ -29,36 +36,52 @@ public class Rewards {
         return rewardsDataBase;
     }
 
+    /*
+     * Returns thr reward number
+     * @return rewardNumber
+     */
     public String getRewardNumber() {
         return rewardNumber;
     }
 
     /*
-     * given the index of reward number, prints the corresponding reward number.
+     * gets an index to acces a specific reward number in rewardsDatabase.
+     * If the index is valid, the reward number is printed. Otherwise, an error message is diplayed.
+     * @param int index
      */
     public void showRewardNumber(int index) {
         if(index >= 0 && index < rewardsDataBase.size()) {
-            System.out.println("rewards number" + rewardsDataBase.get(index));
+            System.out.println("Rewards number: " + rewardsDataBase.get(index));
         }
         else{
             System.out.println("Error. Invalid index.");
         }
     }
-
+    /*
+     * Returns the value rewardPoint.
+     * @return short rewardPoint.
+     */
     public short getRewardPoint() {
         return rewardPoint;
     }
 
+    /*
+     * Prints the current reward points.
+     */
     public void showRewardPoint() {
         System.out.println("Current Reward Points:" + rewardPoint);
     }
     /*
-     * removes a reward number from the database, checks if the reward number exists.
+     * Gets a reward number and checks if it is in the rewards datase.
+     * If it is, it is removed from the database. otherwase, an error message is displayed.
+     * The update rewards database is returned.
+     * @param String rewardNumber
+     * @return ArraList<String> rewardsDatabase
      */
     public ArrayList<String> deleteRewardNumber(String rewardNumber) {
         if(rewardsDataBase.contains(rewardNumber)) {
             rewardsDataBase.remove(rewardNumber);
-            System.out.println("Reward number has been removed.");
+            System.out.println("Reward number " + rewardNumber + "has been removed.");
         }
         else {
             System.out.println("Error. Reward number not found.");
@@ -67,7 +90,11 @@ public class Rewards {
     }
 
     /*
-     * idk if this is right but it adds reward points.
+     * Checks if the rewars poinst exceeds the max limit. 
+     * If it does not then it adds rewards points to the current rewards points.
+     * Otherwise, an error message is displayed.
+     * @param short rewardPoint
+     * @return ArrayList<String> rewardsDataBase
      */
 
     public ArrayList<String> addRewardPoint(short rewardPoint) {
@@ -85,7 +112,11 @@ public class Rewards {
     }
 
     /*
-     * does the same thing as addRewardPoint but removes points.
+     * Checks if the reward points are greater than or = to the given amount.
+     * If it is, it removes the given value from the current rewards points.
+     * Otherwise, an error message is displayed.
+     * @param short rewardPointsToRemove
+     * @return ArrayList<String> rewardsDataBase
      */
 
     public ArrayList<String> removeRewardPoint(short rewardPointsToRemove) {
