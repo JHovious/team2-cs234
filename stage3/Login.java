@@ -81,8 +81,7 @@ public class Login {
         if (verifyLogin()) {
             System.out.println("Login successful!");
             UserMenu user1 = new UserMenu();
-        	Tickets useTicket = new Tickets();
-        	user1.showOption(useTicket);
+        	user1.showOption();
                         
         } else {
             System.out.println("Login failed. Incorrect username or password.");
