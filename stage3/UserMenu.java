@@ -23,7 +23,7 @@ public class UserMenu {
     }
     
     
-    public void showOption(Tickets aTicket){
+    public void showOption(){
         
         do{
             System.out.println("======Hardware Store User Menu======");
@@ -40,7 +40,7 @@ public class UserMenu {
             
             switch(option){
                 case 1: 
-
+                    Tickets aTicket = new Tickets();
                     aTicket.showTicketMenu();
                     break;
                 case 2:
