@@ -1,6 +1,6 @@
 /**
  *
- * @author iamth
+ * Christian Kurdi
  */
 
 import java.util.Scanner;
