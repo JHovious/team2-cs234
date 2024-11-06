@@ -43,7 +43,10 @@ public class UserMenu {
 
                     aTicket.showTicketMenu();
                     break;
-//                case 2:
+                case 2:
+                    Inventory item = new Inventory();
+                    item.showInventoryMenu();
+                    break;
 //                case 3:
                 case 4:
                     System.out.println("Staff Menu");
