@@ -54,7 +54,13 @@ public class UserMenu {
                     staff.showStaffInfo();
                     break;
 //                case 5:
-//                case 6:
+                case 6:
+                    StoreInfo info = new StoreInfo();
+                    info.showName();
+                    info.showAddress();
+                    info.showHours();
+		    break;
+			
                 case 7: System.out.println("Exiting program, goodbye!"); 
                 choice = false; 
                 break;
