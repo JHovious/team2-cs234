@@ -9,6 +9,7 @@ public class Login {
     private String userID;
     private String password;
     private String loginStatus;
+    //private boolean managerCheck;
 
     // Constructor to initialize the Login class
     public Login() {
@@ -45,13 +46,24 @@ public class Login {
 
     // Method to verify login credentials
     public boolean verifyLogin() {
+        //if (this.userID[0].equals("A")){
         if (this.userID.equals("user") && this.password.equals("pass")) {
             this.loginStatus = "Logged In";
+            //managerCheck = true;
             return true;
         } else {
             this.loginStatus = "Login Failed";
             return false;
         }
+        /*if(this.userID[0].equals("B"){
+            if (this.userID.equals("user") && this.password.equals("pass")) {
+            this.loginStatus = "Logged In";
+            managerCheck = false;
+            return true;
+        } else {
+            this.loginStatus = "Login Failed";
+            return false;
+        }*/
     }
 
     // Method to get the login status
