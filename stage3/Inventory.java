@@ -46,6 +46,7 @@ public class Inventory {
                     if (items.get(findIt) != null){
                         String name1 = items.get(findIt).getName();
                         String details1 = items.get(findIt).getDetails();
+                        //You can use similar code as below to get the price of an item in the items hashMap
                         String price1 = items.get(findIt).getPrice();
                         String quantity1 = items.get(findIt).getQuantity();
                         String location1 = items.get(findIt).getLocation();
