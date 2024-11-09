@@ -3,7 +3,7 @@ import java.util.Scanner;
 /**
  * Handles the login for manager specific access and directs user to the Manager Menu
  * Manager Menu call needs to be implemented.
- * @author jahov
+ * @author Justin Hovious
  */
 public class ManagerLogin {
     private String userID;
