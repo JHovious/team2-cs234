@@ -56,7 +56,10 @@ public class UserMenu {
                     Staff staff = new Staff();
                     staff.showStaffInfo();
                     break;
-//                case 5:
+                case 5:
+		    PurchaseMenu purchaseMenu = new PurchaseMenu();
+                    purchaseMenu.showPurchaseMenu();
+                    break;
                 case 6:
                     StoreInfo info = new StoreInfo();
                     info.showName();
