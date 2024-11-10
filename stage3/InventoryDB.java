@@ -68,5 +68,8 @@ public class InventoryDB {
     public String getLocation(){
         return this.location;
     }
+     public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
     
 }
