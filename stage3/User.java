@@ -1,3 +1,8 @@
+/**
+ * Manages user login credentials and stores the value of managerCheck
+ * to determine if the logged in user has manager access to other menus. 
+ * @author Justin Hovious
+ */
 public class User {
     private String userID;
     private String password;
