@@ -1,3 +1,5 @@
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -9,26 +11,29 @@ public class Login {
     private String userID;
     private String password;
     private String loginStatus;
-    //private boolean managerCheck;
+    private boolean managerCheck;
+    private static Map<String, User> users = new HashMap<>();
+
+    // Static block to initialize the users map with predefined users
+    static {
+        users.put("A001", new User("A001", "pass", true));  // John Doe as manager
+        users.put("B002", new User("B002", "pass", false)); // Jane Doe as cashier
+    }
 
     // Constructor to initialize the Login class
     public Login() {
         this.userID = "";
         this.password = "";
         this.loginStatus = "Logged Out";
+        this.managerCheck = false;
     }
 
     // Method to ask for the username
     public void askUsername() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Test Build: username is 'user'");
+        System.out.println("Test Build: username is 'A001' or 'B002'");
         System.out.print("Enter username: ");
         this.userID = scanner.nextLine();
-    }
-
-    // Method to get the username
-    public String getUsername() {
-        return userID;
     }
 
     // Method to ask for the password
@@ -39,36 +44,27 @@ public class Login {
         this.password = scanner.nextLine();
     }
 
-    // Method to get the password
-    public String getPassword() {
-        return password;
-    }
-
     // Method to verify login credentials
     public boolean verifyLogin() {
-        //if (this.userID[0].equals("A")){
-        if (this.userID.equals("user") && this.password.equals("pass")) {
+        User user = users.get(this.userID);
+        if (user != null && user.getPassword().equals(this.password)) {
             this.loginStatus = "Logged In";
-            //managerCheck = true;
+            this.managerCheck = user.isManager();
             return true;
         } else {
             this.loginStatus = "Login Failed";
             return false;
         }
-        /*if(this.userID[0].equals("B"){
-            if (this.userID.equals("user") && this.password.equals("pass")) {
-            this.loginStatus = "Logged In";
-            managerCheck = false;
-            return true;
-        } else {
-            this.loginStatus = "Login Failed";
-            return false;
-        }*/
     }
 
     // Method to get the login status
     public String getLoginStatus() {
         return loginStatus;
+    }
+
+    // Method to check if the user is a manager
+    public boolean isManager() {
+        return managerCheck;
     }
 
     // Method to perform the entire login process
@@ -80,9 +76,14 @@ public class Login {
         // Verify login credentials
         if (verifyLogin()) {
             System.out.println("Login successful!");
+
+            // Create a Tickets object to pass to the UserMenu
+            Tickets tickets = new Tickets();
+            
+            // Call UserMenu with the Tickets object
             UserMenu user1 = new UserMenu();
-        	user1.showOption();
-                        
+            user1.showOption(tickets);
+
         } else {
             System.out.println("Login failed. Incorrect username or password.");
         }
