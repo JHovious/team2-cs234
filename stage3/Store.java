@@ -1,6 +1,5 @@
-
 /**
- * 
+ * Main class for the program. Handles initial user login.
  * @author Justin Hovious
  */
 public class Store {
@@ -9,7 +8,7 @@ public class Store {
      * @param args possible command-line arguments
      */
     public static void main(String[] args) {
-        LoginMenu loginMenu = new LoginMenu();
-        loginMenu.showLoginMenu();
+        Login login = new Login();
+        login.performLogin();
     }
 }
