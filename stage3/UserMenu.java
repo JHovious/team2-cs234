@@ -11,13 +11,16 @@ public class UserMenu {
     //Instance Variables
     private int option;
     private boolean choice;
-    
+    private boolean isManager;
+    private Staff staff;
 
     
     //Constructor
     public UserMenu(){
         option = 9; //Default number to be changed with working program
         choice = true;
+	isManager = false;
+	staff = new Staff();
         
         
     }
