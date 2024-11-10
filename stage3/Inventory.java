@@ -110,6 +110,9 @@ public class Inventory {
     public void findItem(){
         
     }
+    public HashMap<Integer,InventoryDB> getItems() {
+        return items;
+    }
     
     
 }
