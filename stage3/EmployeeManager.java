@@ -1,5 +1,10 @@
 import java.util.Scanner;
 
+/**
+ * Class handles the CRUD capabilities for users with manager access to 
+ * modify, create, or delete staff. 
+ * @author Justin Hovious
+ */
 public class EmployeeManager {
     
     private Staff staff;
