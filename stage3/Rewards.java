@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 
 public class Rewards {
@@ -6,13 +6,13 @@ public class Rewards {
     private String rewardNumber;
     private short rewardPoint;
     private short rewardPointMax;
-    private ArrayList<String> rewardsDataBase;
+    private LinkedList<String> rewardsDataBase;
 
     /*
      * Consructor
-     * @param String rewardNumber, short rewardPoint, short rewardPointMax,ArrayList<String> rewardsDataBase
+     * @param String rewardNumber, short rewardPoint, short rewardPointMax,LinkedList<String> rewardsDataBase
      */
-    public Rewards(String rewardNumber, short rewardPoint, short rewardPointMax,ArrayList<String> rewardsDataBase) {
+    public Rewards(String rewardNumber, short rewardPoint, short rewardPointMax,LinkedList<String> rewardsDataBase) {
         this.rewardNumber = rewardNumber;
         this.rewardPoint = rewardPoint;
         this.rewardPointMax = rewardPointMax;
@@ -29,7 +29,7 @@ public class Rewards {
      * Adds the formattedRewardNumber to the RewardsDatabase and increments nextRewardNumber.
      * @return rewardsDatabase
      */
-    public ArrayList<String> createRewardNumber() {
+    public LinkedList<String> createRewardNumber() {
         String formattedRewardNumber = String.format("%05d", nextRewardNumber);
         rewardsDataBase.add(formattedRewardNumber);
         nextRewardNumber++;
@@ -76,9 +76,9 @@ public class Rewards {
      * If it is, it is removed from the database. otherwase, an error message is displayed.
      * The update rewards database is returned.
      * @param String rewardNumber
-     * @return ArraList<String> rewardsDatabase
+     * @return LinkedList<String> rewardsDatabase
      */
-    public ArrayList<String> deleteRewardNumber(String rewardNumber) {
+    public LinkedList<String> deleteRewardNumber(String rewardNumber) {
         if(rewardsDataBase.contains(rewardNumber)) {
             rewardsDataBase.remove(rewardNumber);
             System.out.println("Reward number " + rewardNumber + "has been removed.");
@@ -94,10 +94,10 @@ public class Rewards {
      * If it does not then it adds rewards points to the current rewards points.
      * Otherwise, an error message is displayed.
      * @param short rewardPoint
-     * @return ArrayList<String> rewardsDataBase
+     * @return LinkedList<String> rewardsDataBase
      */
 
-    public ArrayList<String> addRewardPoint(short rewardPoint) {
+    public LinkedList<String> addRewardPoint(short rewardPoint) {
         if (rewardPoint <= rewardPointMax) {
             this.rewardPoint += rewardPoint;
             System.out.println("Rewards points added " + rewardPoint);
@@ -116,10 +116,10 @@ public class Rewards {
      * If it is, it removes the given value from the current rewards points.
      * Otherwise, an error message is displayed.
      * @param short rewardPointsToRemove
-     * @return ArrayList<String> rewardsDataBase
+     * @return LinkedList<String> rewardsDataBase
      */
 
-    public ArrayList<String> removeRewardPoint(short rewardPointsToRemove) {
+    public LinkedList<String> removeRewardPoint(short rewardPointsToRemove) {
         if (this.rewardPoint >= rewardPointsToRemove) {
             this.rewardPoint -= rewardPointsToRemove;
             System.out.println("Rewards points removed " + rewardPointsToRemove);
