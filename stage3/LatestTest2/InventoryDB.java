@@ -9,7 +9,7 @@ public class InventoryDB {
     
     //Instance Variables
     private String name, details, price, location;
-    private int quantity;
+    private int quantity, num;
     private Scanner sc, numScan;
     
     //Main constructor
@@ -19,18 +19,26 @@ public class InventoryDB {
         this.price = "No price";
         this.quantity = 0;
         this.location = "Store";
+        this.num = 1;
         sc = new Scanner(System.in);
         numScan = new Scanner(System.in);
     }
     
     //Dummy Constructor
-    public InventoryDB(String name, String details, String price, int quantity, String location){
+    public InventoryDB(int num, String name, String details, String price, int quantity, String location){
         this.name = name;
+        this.num = num;
         this.details = details;
         this.price = price;
         this.quantity = quantity;
         this.location = location;
     }
+    
+    public int getNum(){
+        return this.num;
+    }
+    
+    
     
     
     //Methods for manager
@@ -53,6 +61,11 @@ public class InventoryDB {
     public void createItemLocation(){
         System.out.println("Enter item location: ");
         this.location = sc.nextLine();
+    }
+    
+    public void createItemNumber(){
+        System.out.println("Enter item number: ");
+        this.num = numScan.nextInt();
     }
     
     
