@@ -4,6 +4,7 @@
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
+import java.util.HashMap;
 
 
 public class Purchase {
@@ -18,6 +19,7 @@ public class Purchase {
     private Rewards rewards;
     private ArrayList<InventoryDB> cart;
     private float subtotal;
+    private HashMap<Integer,InventoryDB> items;
 
     
 
