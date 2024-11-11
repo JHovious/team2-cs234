@@ -26,7 +26,7 @@ public class PurchaseMenu {
 
             switch (option) {
                 case 1:
-                    purchase.checkout();
+                    purchase.checkout(items);
                     break;
                 case 0:
                     System.out.println("Proceeding to payment...");
