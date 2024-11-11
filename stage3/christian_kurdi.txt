@@ -1,1 +1,1 @@
-
+I created Tickets, TicketDB, Inventory, Inventory DB, User Menu, I redid Staff and created Staff DB, and I made the managerStatus method in Login. I added dummy information for inventory, staff, and tickets. 
