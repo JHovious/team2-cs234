@@ -1,9 +1,10 @@
+import java.util.HashMap;
 import java.util.Scanner;
 
 /**
  * Class handles the CRUD capabilities for users with manager access to 
  * modify, create, or delete staff. 
- * @author Justin Hovious
+ * @author Justin Hovious and Christian Kurdi
  */
 public class EmployeeManager {
     
@@ -13,8 +14,8 @@ public class EmployeeManager {
     private Scanner sc;
     private Scanner scanner;
     
-    public EmployeeManager(){
-        staff = new Staff();
+    public EmployeeManager(HashMap<String, StaffDB> employees, Staff accessStaff){
+        this.staff = accessStaff;
         option = 9;
         choice = true;
         sc = new Scanner(System.in);
@@ -23,7 +24,7 @@ public class EmployeeManager {
     
 
     // Display the submenu for manager options
-    public void showManagerMenu(){
+    public void showManagerMenu(HashMap<String, StaffDB> employees){
         System.out.println("Manager Menu");
         System.out.println("1. Create Staff");
         System.out.println("2. Update Staff");
@@ -34,18 +35,18 @@ public class EmployeeManager {
         
         switch(option){
             case 1: 
-                createEmployee();
+                createEmployee(employees);
                 choice = true;
                 break;
             case 2:
-                updateEmployee();
+                updateEmployee(employees);
                 choice = true;
                 break;
             case 3:
                 String name;
                 System.out.println("Enter name of employee to delete: ");
                 name = scanner.nextLine();
-                deleteEmployee(name);
+                deleteEmployee(name, employees);
                 choice = true;
                 break;
             case 4:
@@ -59,9 +60,10 @@ public class EmployeeManager {
     }
 
     // Method to create a new employee
-    private void createEmployee() {
-        Staff newStaff = new Staff();
-        StaffDB newStaffInfo = new StaffDB(newStaff.getName());
+    private void createEmployee(HashMap<String, StaffDB> employees) {
+        
+        System.out.println("Enter employee name");
+        String name = sc.nextLine();
         System.out.println("Enter employee ID: ");
         String id = sc.nextLine();
         System.out.println("Enter hire date (YYYY-MM-DD): ");
@@ -79,15 +81,8 @@ public class EmployeeManager {
         System.out.println("Enter unpaid time hours: ");
         byte unpaidTime = scanner.nextByte();
         
-        newStaffInfo.setEmployeeID(id);
-        newStaffInfo.setHireDate(hireDate);
-        newStaffInfo.setEmployeeTitle(title);
-        newStaffInfo.setEmployeeEmail(email);
-        newStaffInfo.setEmployeePhone(phone);
-        newStaffInfo.setPto(pto);
-        newStaffInfo.setSickTime(sickTime);
-        newStaffInfo.setUnpaidTime(unpaidTime);
-        newStaff.addStaff(newStaffInfo);
+        Staff newPerson1 = new Staff(employees,name,id, hireDate, title, email, phone, pto, sickTime, unpaidTime);
+        
         
         
         
@@ -95,13 +90,13 @@ public class EmployeeManager {
     }
 
     // Method to delete an employee
-    public void deleteEmployee(String name) {
+    public void deleteEmployee(String name, HashMap<String, StaffDB> employees) {
         
-        staff.removeStaff(name);
+        employees.remove(name);
     }
 
     // Method to update an employee's information
-    public void updateEmployee() {
+    public void updateEmployee(HashMap<String, StaffDB> employees) {
         int choice;
         boolean check = true;
         String name;
@@ -118,55 +113,55 @@ public class EmployeeManager {
             System.out.println("Enter name of employee: ");
             
             name = scanner.nextLine();
-            if(staff.getStaff(name) != null){
+            if(employees.get(name) != null){
                 switch(choice){
 
                     case 1:
                         System.out.println("Enter ID: ");
                         String id = scanner.nextLine();
-                        staff.getStaff(name).setEmployeeID(id);
+                        employees.get(name).setEmployeeID(id);
                         System.out.println("ID updated successfully");
                         check = false;
                         break;
                     case 2:
                         System.out.println("Enter Title: ");
                         String title = scanner.nextLine();
-                        staff.getStaff(name).setEmployeeID(title);
+                        employees.get(name).setEmployeeTitle(title);
                         System.out.println("Title updated successfully");
                         check = false;
                         break;
                     case 3:
                         System.out.println("Enter Email: ");
                         String email = scanner.nextLine();
-                        staff.getStaff(name).setEmployeeID(email);
+                        employees.get(name).setEmployeeEmail(email);
                         System.out.println("Email updated successfully");
                         check = false;
                         break;
                     case 4:
                         System.out.println("Enter Phone Number: ");
                         String phone = scanner.nextLine();
-                        staff.getStaff(name).setEmployeeID(phone);
+                        employees.get(name).setEmployeePhone(phone);
                         System.out.println("Phone updated successfully");
                         check = false;
                         break;
                     case 5:
                         System.out.println("Enter PTO: ");
-                        String pto = scanner.nextLine();
-                        staff.getStaff(name).setEmployeeID(pto);
+                        int pto = scanner.nextInt();
+                        employees.get(name).setPto(pto);
                         System.out.println("PTO updated successfully");
                         check = false;
                         break;
                     case 6:
                         System.out.println("Enter Sick Time: ");
-                        String sick = scanner.nextLine();
-                        staff.getStaff(name).setEmployeeID(sick);
+                        int sick = scanner.nextInt();
+                        employees.get(name).setSickTime(sick);
                         System.out.println("Sick Time updated successfully");
                         check = false;
                         break;
                     case 7:
                         System.out.println("Enter Unpaid Time Off: ");
-                        String unpaid = scanner.nextLine();
-                        staff.getStaff(name).setEmployeeID(unpaid);
+                        int unpaid = scanner.nextInt();
+                        employees.get(name).setUnpaidTime(unpaid);
                         System.out.println("Unpaid Time Off updated successfully");
                         check = false;
                         break;
