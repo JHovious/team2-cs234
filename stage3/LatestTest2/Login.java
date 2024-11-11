@@ -12,7 +12,10 @@ public class Login {
     private String password;
     private String loginStatus;
     private boolean managerCheck;
-    HashMap<String, StaffDB> employees;
+    private HashMap<String, StaffDB> employees;
+    private HashMap<Integer,InventoryDB> items;
+    private HashMap<Integer,TicketDB> tickets;
+    private Staff staff;
 
     
     // Constructor to initialize the Login class
@@ -22,6 +25,9 @@ public class Login {
         this.loginStatus = "Logged Out";
         managerCheck = false;
         employees = new HashMap<>();
+        items = new HashMap<>();
+        staff = new Staff(employees);
+        tickets = new HashMap<>();
         
     }
 
@@ -108,10 +114,18 @@ public class Login {
         // Verify login credentials
         if (verifyLogin(this.userID)) {
             System.out.println("Login successful!");
+            Inventory item = new Inventory(2, employees, staff, items, "Wrench", "It's a wrench", "5.99", 15, "A1");
+        
+            Inventory item2 = new Inventory(3, employees, staff, items, "Tape Measure", "Measures lengths", "8.99", 50, "B1");
+        
+            Inventory item3 = new Inventory(4, employees, staff, items, "Screwdriver", "Hex screwdriver", "3.99", 10, "B2");
             Staff dummy1 = new Staff(employees,"George", "B003", "2020-03-15", "Salesman", "sales@hardware.com", "775-859-9568", 50, 40, 80);
             Staff dummy2 = new Staff(employees,"Frank", "A003", "2023-06-30", "Assistant Manager", "AM@hardware.com", "505-867-5309", 10, 10, 5);
-            UserMenu user1 = new UserMenu(employees);
-        	user1.showOption(this.userID);
+            Tickets ticket = new Tickets(tickets, 2, "Help the store is flooding", "Flood", "3", "Manager");
+            Tickets ticket2 = new Tickets(tickets, 3, "Need gloves added to inventory", "New Item", "2", "Manager");
+            Tickets ticket3 = new Tickets(tickets, 4, "Can someone show how to create a rewards account", "Rewards", "1", "Anyone");
+            UserMenu user1 = new UserMenu(employees, items, staff, tickets);
+            user1.showOption(this.userID);
                         
         } else {
             System.out.println("Login failed. Incorrect username or password.");
