@@ -34,7 +34,7 @@ public class StaffDB {
                 
     }
     
-    //Dummy Constructor
+    
     public StaffDB(String name, String employeeId, String hireDate, String employeeTitle,
             String employeeEmail, String employeePhone, int pto, int sickTime, int unpaidTime){
         this.employeeName = name;
@@ -105,15 +105,15 @@ public class StaffDB {
         this.employeePhone = employeePhone;
     }
 
-    public void setPto(Byte pto) {
+    public void setPto(int pto) {
         this.pto = pto;
     }
 
-    public void setSickTime(Byte sickTime) {
+    public void setSickTime(int sickTime) {
         this.sickTime = sickTime;
     }
 
-    public void setUnpaidTime(Byte unpaidTime) {
+    public void setUnpaidTime(int unpaidTime) {
         this.unpaidTime = unpaidTime;
     }    
     
