@@ -16,21 +16,31 @@ public class Tickets {
     // Instance Variables
     private boolean choice;
     private int option;
-    private Integer ticketNum;
     private TicketDB newTicket;
-    private HashMap<Integer,TicketDB> tickets;
     private Scanner sc;
+    private Scanner scan;
+    private Scanner scanner;
+    private HashMap<Integer,TicketDB> tickets;
     
     //Constructor
-    public Tickets(){
+    public Tickets(HashMap<Integer,TicketDB> ticketsDB){
         choice = true;
         option = 9; //default number
-       
-        ticketNum = 1;
+        tickets = ticketsDB;
         newTicket = new TicketDB();
-        //create a Hash Map for tickets objects
-        tickets = new HashMap<>();
-        dummyCreate();
+        sc = new Scanner(System.in);
+        scan = new Scanner(System.in);
+        scanner = new Scanner(System.in);
+       
+    }
+    
+    public Tickets(HashMap<Integer,TicketDB> ticketsDB, int num, String ticketMessage,
+            String ticketSubject, String ticketPriority, String ticketRecipient){
+        
+        tickets = ticketsDB;
+        newTicket = new TicketDB(num, ticketMessage, ticketSubject, ticketPriority, ticketRecipient);
+        tickets.put(newTicket.getNum(), newTicket);
+        sc = new Scanner(System.in);
     }
   
     
@@ -49,17 +59,15 @@ public class Tickets {
             
             switch(option){
                 case 1:
-                    System.out.println("Testing for create ticket");
                     newTicket = new TicketDB();
                     newTicket.createTicketSubject();
                     newTicket.createTicketPriority();
                     newTicket.createTicketRecipient();
                     newTicket.createTicketMessage();
+                    newTicket.createNum();
                     
-                    //Need to generate new number/Key
-                    newNum();
-                    addTicket(newTicket);
-                    System.out.println("Ticket created successfully. The ticket number is " + ticketNum);
+                    tickets.put(newTicket.getNum(), newTicket);
+                    System.out.println("Ticket created successfully. The ticket number is " + newTicket.getNum());
                     choice = true;
                     break;
                     
@@ -68,43 +76,26 @@ public class Tickets {
                     
                 case 2:
                     System.out.print("Enter the ticket number: ");
-                    Integer lookUp = sc.nextInt();
-                    //Need to verify if key exists in map
-                    String priority = tickets.get(lookUp).getTicketPriority();
-                    String recipient = tickets.get(lookUp).getTicketRecipient();
-                    String subject = tickets.get(lookUp).getTicketSubject();
-                    String message = tickets.get(lookUp).getTicketMessage();
-                    System.out.println("Ticket Priority: " + priority);
-                    System.out.println("Ticket Recipient: " + recipient);
-                    System.out.println("Ticket Subject: " + subject);
-                    System.out.println("Ticket Message: " + message);
-                    
+                    int lookUp = sc.nextInt();
+                    if(tickets.get(lookUp) != null){
+                        //Need to verify if key exists in map
+                        String priority = tickets.get(lookUp).getTicketPriority();
+                        String recipient = tickets.get(lookUp).getTicketRecipient();
+                        String subject = tickets.get(lookUp).getTicketSubject();
+                        String message = tickets.get(lookUp).getTicketMessage();
+                        System.out.println("Ticket Priority: " + priority);
+                        System.out.println("Ticket Recipient: " + recipient);
+                        System.out.println("Ticket Subject: " + subject);
+                        System.out.println("Ticket Message: " + message);
+                    }else{
+                        System.out.println("Number is not a ticket. Returning to Ticket Menu");
+                    }
                     choice = true;
                     break;
                 case 3:
-                    
-                    System.out.print("Enter the ticket number: ");
-                    Integer lookUp2 = sc.nextInt();
-                    System.out.println("Enter 1 to Update Subject");
-                    System.out.println("Enter 2 to Update Message");
-                    Integer lookUp3 = sc.nextInt();
-                    if(lookUp3 == 1){
-                        System.out.print("Caution!! Old Subject will be erased!! Enter 1 to accent and continue: ");
-                        Integer lookUp5 = sc.nextInt();
-                        if(lookUp5 == 1){
-                            tickets.get(lookUp2).createTicketSubject();
-                        } else{
-                            System.out.println("Returning to Ticket Menu");
-                        }
-                    } else if(lookUp3 == 2){
-                        System.out.print("Caution!! Old message will be erased!! Enter 1 to accept and continue : ");
-                        Integer lookUp4 = sc.nextInt();
-                        if(lookUp4 == 1){
-                            tickets.get(lookUp2).createTicketMessage();
-                        } else{
-                            System.out.println("Returning to Ticket Menu");
-                        }
-                    }
+
+                    update();
+
                     choice = true;
                     break;
                 case 4:
@@ -119,26 +110,28 @@ public class Tickets {
         } while(choice);
     }
     
-    //Method to create dummy tickets
-    private void dummyCreate(){
-        TicketDB ticket;
-        
-        ticket = new TicketDB("Help the store is flooding", "Flood", "3", "Manager");
-        addTicket(ticket);
-        newNum();
-        ticket = new TicketDB("Need gloves added to inventory", "New Item", "2", "Manager");
-        addTicket(ticket);
-        newNum();
-        ticket = new TicketDB("Can someone show how to create a rewards account", "Rewards", "1", "Anyone");
-        addTicket(ticket);
-        newNum();
-    }
-    
-    public void newNum(){
-        ticketNum = ticketNum + 1;
-    }
-    
-    public void addTicket(TicketDB ticket){
-        tickets.put(ticketNum, ticket);
+    public void update(){
+        System.out.print("Enter the ticket number: ");
+        int lookUp2 = scan.nextInt();
+        if(tickets.get(lookUp2) != null){
+            System.out.println("Enter 1 to Update Subject");
+            System.out.println("Enter 2 to Update Message");
+            int lookUp3 = scan.nextInt();
+            switch(lookUp3){
+                case 1:
+                    System.out.println("Enter new subject: ");
+                    
+                    tickets.get(lookUp2).setSubject(scanner.nextLine());
+                    break;
+                case 2:
+                    System.out.println("Enter new message: ");
+                    tickets.get(lookUp2).setMessage(scanner.nextLine());
+                    break;
+                default:
+                    System.out.println("Incorrect option. Returning to Ticket Menu");
+            }
+        } else{
+            System.out.println("Number is not a ticket. Returning to Ticket Menu");
+        }
     }
 }
