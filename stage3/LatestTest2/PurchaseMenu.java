@@ -5,9 +5,11 @@ public class PurchaseMenu {
     private boolean choice;
     private Scanner scanner;
     private Purchase purchase;
+    private HashMap<String, InventoryDB> items;
 
-    public PurchaseMenu() {
+    public PurchaseMenu(HashMap<String, InventoryDB> itemsDB) {
         choice = true;
+        items = itemsDB;
         scanner = new Scanner(System.in);
         // Initialize Purchase with dummy data or actual inventory
         purchase = new Purchase("Sample", "001", 20, "100", "20");
