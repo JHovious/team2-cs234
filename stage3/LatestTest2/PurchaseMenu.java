@@ -3,14 +3,15 @@ import java.util.Scanner;
 public class PurchaseMenu {
 
     private boolean choice;
-    private Scanner scanner;
-    private Purchase purchase;
+    private final Scanner scanner;
+    private final  Purchase purchase;
 
-    public PurchaseMenu() {
-        choice = true;
+    public PurchaseMenu(Inventory inventory) {
         scanner = new Scanner(System.in);
-        // Initialize Purchase with dummy data or actual inventory
-        purchase = new Purchase(items, "Sample", "001", 20, "100", "20");
+        choice = true;
+
+        // Initialize Purchase with actual inventory
+        purchase = new Purchase(inventory, "Sample Item", "001", 20.0f, "100");
     }
 
     public void showPurchaseMenu() {
@@ -33,11 +34,12 @@ public class PurchaseMenu {
                     break;
                 default:
                     System.out.println("Invalid option, please try again.");
+                    break;
             }
         } while (choice);
     }
 
-    private void processPayment() {
+    public void processPayment() {
         System.out.print("Enter total amount: ");
         float total = scanner.nextFloat();
         System.out.print("Enter payment type (card/cash): ");
