@@ -14,20 +14,37 @@ public class Inventory {
     private boolean choice;
     private int option;
     private Integer itemNum = 1;
-    private HashMap<Integer,InventoryDB> items = new HashMap<>();
+    private HashMap<Integer,InventoryDB> items;
     private Scanner sc;
-    EmployeeManager accessMenu;
-    Login verify;
+    private EmployeeManager accessMenu;
+    private Login verify;
+    private InventoryDB testDB;
     
-    public Inventory(){
+    public Inventory(HashMap<String, StaffDB> employees, Staff staff,HashMap<Integer,InventoryDB>itemsDB){
         choice = true;
         option = 9;
-        accessMenu = new EmployeeManager();
+
         verify = new Login(); 
         sc = new Scanner(System.in);
-        dummyCreate();
+        items = itemsDB;
+        accessMenu = new EmployeeManager(employees, staff, items);
+        testDB = new InventoryDB();
+        items.put(testDB.getNum(),testDB);
         
     }
+    
+    public Inventory(int itemNum1,HashMap<String, StaffDB> employees, Staff staff,HashMap<Integer,InventoryDB>itemsDB, 
+            String name, String details, String price, int quantity, String location){
+        choice = true;
+        option = 9;
+        verify = new Login(); 
+        sc = new Scanner(System.in);
+        items = itemsDB;
+        accessMenu = new EmployeeManager(employees, staff, items);
+        InventoryDB dummyItem = new InventoryDB(itemNum1, name, details, price, quantity, location);
+        items.put(dummyItem.getNum(), dummyItem);
+    }
+    
     public void showInventoryMenu(String userID){
         
         do{
@@ -106,39 +123,15 @@ public class Inventory {
         } while(choice);
     }
     
-    //Method to create dummy inventory
-    private void dummyCreate(){
-        InventoryDB item;
-        
-        item = new InventoryDB("Wrench", "It's a wrench", "5.99", 15, "A1");
-        addItem(item);
-        newNum();
-        item = new InventoryDB("Tape Measure", "Measures lengths", "8.99", 50, "B1");
-        addItem(item);
-        newNum();
-        item = new InventoryDB("Screwdriver", "Hex screwdriver", "3.99", 10, "B2");
-        addItem(item);
-        newNum();
-    }
     
-    //Method to increase ticket numbers
-    public void newNum(){
-        itemNum = itemNum + 1;
-        
-    }
     
-    //Method to add to map
-    public void addItem(InventoryDB item){
-        items.put(itemNum, item);
-    }
+    
+    
     
     public void managerCreate(){
         
-        InventoryDB newItem = accessMenu.createItem();
+        accessMenu.createItem();
         
-        newNum();//Need to generate new number/Key
-        addItem(newItem);//add the key/value pair
-        System.out.println("The item number is " + itemNum);
     }
     
     public void managerUpdate(){
