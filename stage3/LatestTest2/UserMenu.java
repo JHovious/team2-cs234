@@ -13,16 +13,26 @@ public class UserMenu {
     private int option;
     private boolean choice;
     private Staff staff;
-    HashMap<String, StaffDB> employees;
+    private HashMap<String, StaffDB> employees;
+    private HashMap<Integer,InventoryDB> items;
+    private HashMap<Integer,TicketDB> tickets;
+    private Inventory item;
+    private Tickets ticket;
+    
     
 
     
     //Constructor
-    public UserMenu(HashMap<String, StaffDB> employeesDB){
+    public UserMenu(HashMap<String, StaffDB> employeesDB, HashMap<Integer,InventoryDB>itemsDB, Staff staff1,HashMap<Integer,TicketDB> ticketsDB){
         option = 9; //Default number to be changed with working program
         choice = true;
         employees = employeesDB;
-        staff = new Staff(employees);
+        staff = staff1;
+        items = itemsDB;
+        item = new Inventory(employees, staff, items);
+        tickets = ticketsDB;
+        ticket = new Tickets(tickets);
+        
         
         
         
@@ -48,11 +58,10 @@ public class UserMenu {
             
             switch(option){
                 case 1: 
-                    Tickets aTicket = new Tickets();
-                    aTicket.showTicketMenu();
+                    ticket.showTicketMenu();
                     break;
                 case 2:
-                    Inventory item = new Inventory(employees, staff);
+                    
                     item.showInventoryMenu(userID);
                     break;
 //                case 3:
@@ -72,7 +81,7 @@ public class UserMenu {
 		    break;
                    
                 case 7:
-                    EmployeeManager accessMenu = new EmployeeManager(employees, this.staff);
+                    EmployeeManager accessMenu = new EmployeeManager(employees, this.staff, items);
                     accessMenu.showManagerMenu(employees);
                     break;
                     
