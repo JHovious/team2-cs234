@@ -4,7 +4,6 @@
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
-import java.util.HashMap;
 
 
 public class Purchase {
@@ -19,7 +18,6 @@ public class Purchase {
     private Rewards rewards;
     private ArrayList<InventoryDB> cart;
     private float subtotal;
-    private HashMap<Integer,InventoryDB> items;
 
     
 
@@ -27,8 +25,7 @@ public class Purchase {
      * constructor 
      * @param String itemName, String itemNumber, float price, String itemQuantity, String removeQuantity
      */
-    public Purchase(HashMap<Integer, InventoryDB> itemsDB,String itemName, String itemNumber, float price, String itemQuantity, String removeQuantity) {
-        items = itemsDB;
+    public Purchase(String itemName, String itemNumber, float price, String itemQuantity, String removeQuantity) {
         this.itemName = itemName;
         this.itemNumber = itemNumber;
         this.price = price;
