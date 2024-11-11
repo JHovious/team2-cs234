@@ -13,11 +13,13 @@ public class EmployeeManager {
     private boolean choice;
     private Scanner sc;
     private Scanner scanner;
+    private HashMap<Integer,InventoryDB> items;
     
-    public EmployeeManager(HashMap<String, StaffDB> employees, Staff accessStaff){
+    public EmployeeManager(HashMap<String, StaffDB> employees, Staff accessStaff,HashMap<Integer,InventoryDB> itemsDB){
         this.staff = accessStaff;
         option = 9;
         choice = true;
+        items = itemsDB;
         sc = new Scanner(System.in);
         scanner = new Scanner(System.in);
     }
@@ -178,16 +180,18 @@ public class EmployeeManager {
        
     }
     
-    public InventoryDB createItem(){
-        
+    public void createItem(){
+       
         InventoryDB newItem = new InventoryDB();
         newItem.createItemName();
         newItem.createItemDetails();
         newItem.createItemQuantity();
         newItem.createItemPrice();
         newItem.createItemLocation();
+        newItem.createItemNumber();
+        items.put(newItem.getNum(), newItem);
         System.out.print("Item created successfully. ");
-        return newItem;
+        System.out.println("The item number is " + newItem.getNum());
         
     }
 }
