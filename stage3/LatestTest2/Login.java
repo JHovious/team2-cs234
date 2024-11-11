@@ -1,16 +1,18 @@
+import java.util.HashMap;
 import java.util.Scanner;
 
 
 /**
  * This class requests login credentials from the users and verifies them 
  * prior to allowing access to the rest of the system.
- * @author Justin Hovious
+ * @author Justin Hovious and Christian Kurdi
  */
 public class Login {
     private String userID;
     private String password;
     private String loginStatus;
     private boolean managerCheck;
+    HashMap<String, StaffDB> employees;
 
     
     // Constructor to initialize the Login class
@@ -19,6 +21,7 @@ public class Login {
         this.password = "";
         this.loginStatus = "Logged Out";
         managerCheck = false;
+        employees = new HashMap<>();
         
     }
 
@@ -105,7 +108,9 @@ public class Login {
         // Verify login credentials
         if (verifyLogin(this.userID)) {
             System.out.println("Login successful!");
-            UserMenu user1 = new UserMenu();
+            Staff dummy1 = new Staff(employees,"George", "B003", "2020-03-15", "Salesman", "sales@hardware.com", "775-859-9568", 50, 40, 80);
+            Staff dummy2 = new Staff(employees,"Frank", "A003", "2023-06-30", "Assistant Manager", "AM@hardware.com", "505-867-5309", 10, 10, 5);
+            UserMenu user1 = new UserMenu(employees);
         	user1.showOption(this.userID);
                         
         } else {
