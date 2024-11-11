@@ -5,11 +5,9 @@ public class PurchaseMenu {
     private boolean choice;
     private Scanner scanner;
     private Purchase purchase;
-    private HashMap<String, InventoryDB> items;
 
-    public PurchaseMenu(HashMap<String, InventoryDB> itemsDB) {
+    public PurchaseMenu() {
         choice = true;
-        items = itemsDB;
         scanner = new Scanner(System.in);
         // Initialize Purchase with dummy data or actual inventory
         purchase = new Purchase(items, "Sample", "001", 20, "100", "20");
@@ -26,7 +24,7 @@ public class PurchaseMenu {
 
             switch (option) {
                 case 1:
-                    purchase.checkout(items);
+                    purchase.checkout();
                     break;
                 case 0:
                     System.out.println("Proceeding to payment...");
