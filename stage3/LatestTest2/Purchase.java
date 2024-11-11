@@ -27,7 +27,8 @@ public class Purchase {
      * constructor 
      * @param String itemName, String itemNumber, float price, String itemQuantity, String removeQuantity
      */
-    public Purchase(String itemName, String itemNumber, float price, String itemQuantity, String removeQuantity) {
+    public Purchase(HashMap<Integer, InventoryDB> itemsDB,String itemName, String itemNumber, float price, String itemQuantity, String removeQuantity) {
+        items = itemsDB;
         this.itemName = itemName;
         this.itemNumber = itemNumber;
         this.price = price;
