@@ -213,6 +213,9 @@ public class Inventory {
             System.out.println("Item number not found. Returning to Inventory Menu.");
         }
     }
+    public HashMap<Integer,InventoryDB>  getItems() {
+     return items;
+   }
     
     
 }
