@@ -1,1 +1,1 @@
-To compile our program, navigate to the folder which contains all java files. In the terminal, type in "javac Store.java" and this will compile the entire program. Then, type "java Store" and the program will run.
+To compile our program, navigate to the folder which contains all java files(Stage3Submission). In the terminal, type in "javac Store.java" and this will compile the entire program. Then, type "java Store" and the program will run.
