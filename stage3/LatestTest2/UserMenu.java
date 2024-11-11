@@ -1,4 +1,5 @@
 
+import java.util.HashMap;
 import java.util.Scanner;
 
 /**
@@ -12,14 +13,18 @@ public class UserMenu {
     private int option;
     private boolean choice;
     private Staff staff;
+    HashMap<String, StaffDB> employees;
     
 
     
     //Constructor
-    public UserMenu(){
+    public UserMenu(HashMap<String, StaffDB> employeesDB){
         option = 9; //Default number to be changed with working program
         choice = true;
-        staff = new Staff();
+        employees = employeesDB;
+        staff = new Staff(employees);
+        
+        
         
         
     }
@@ -47,13 +52,13 @@ public class UserMenu {
                     aTicket.showTicketMenu();
                     break;
                 case 2:
-                    Inventory item = new Inventory();
+                    Inventory item = new Inventory(employees, staff);
                     item.showInventoryMenu(userID);
                     break;
 //                case 3:
                 case 4:
-                    Staff staff = new Staff();
-                    staff.showMenu();
+                    
+                    staff.showMenu(employees);
                     break;
                 //case 5:
                     //PurchaseMenu purchaseMenu = new PurchaseMenu();
@@ -67,8 +72,8 @@ public class UserMenu {
 		    break;
                    
                 case 7:
-                    EmployeeManager accessMenu = new EmployeeManager();
-                    accessMenu.showManagerMenu();
+                    EmployeeManager accessMenu = new EmployeeManager(employees, this.staff);
+                    accessMenu.showManagerMenu(employees);
                     break;
                     
 			
