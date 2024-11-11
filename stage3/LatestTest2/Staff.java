@@ -1,7 +1,7 @@
 
 /**
  *
- * Christian Kurdi
+ * Christian Kurdi and Justin Hovious
  * 
  */
 
@@ -16,31 +16,36 @@ public class Staff extends Person{
     
     private boolean choice;
     private int option;
-    private HashMap<String,StaffDB> employees = new HashMap<>();
-    private StaffDB testStaff = new StaffDB(name);
+    private StaffDB testStaff;
     private Scanner sc;
     private Scanner scanner;
+    private HashMap<String, StaffDB> employees;
     
-    public Staff(){
+    public Staff(HashMap<String, StaffDB> employeesDB){
         choice = true;
         option = 9;
         sc = new Scanner(System.in);
         scanner = new Scanner(System.in);
-        createDummy();
+        testStaff = new StaffDB(this.name);
+        employees = employeesDB;
+        employees.put(this.name, testStaff);
+        
         
     }
     
-    //Create dummy info
-    private void createDummy(){
-        this.setName("George");
-        StaffDB staff1A = new StaffDB("George", "B003", "2020-03-15", "Salesman", "sales@hardware.com", "775-859-9568", 50, 40, 80);
-        addStaff(staff1A);
-        this.setName("Frank");
-        StaffDB staff2A = new StaffDB("Frank", "A003", "2023-06-30", "Assistant Manager", "AM@hardware.com", "505-867-5309", 10, 10, 5);
-        addStaff(staff2A);
-    }
     
-    public void showMenu(){
+    public Staff(HashMap<String, StaffDB> employeesDB, String name, String employeeId, String hireDate, String employeeTitle,
+        String employeeEmail, String employeePhone, int pto, int sickTime, int unpaidTime){
+        employees = employeesDB;
+        this.name = name;
+        StaffDB dummyStaff = new StaffDB(this.name, employeeId, hireDate, employeeTitle, employeeEmail, employeePhone, pto, sickTime, unpaidTime);
+        employees.put(this.name, dummyStaff);
+    }
+
+	
+   
+    
+    public void showMenu(HashMap<String, StaffDB> employees){
         do{
             System.out.println("------Staff Menu------");
             System.out.println("1. Show Staff Info");
@@ -53,7 +58,7 @@ public class Staff extends Person{
             
             switch(option){
                 case 1: 
-                    showStaffInfo();
+                    showStaffInfo(employees);
                         
                     choice = true;
                     break;
@@ -62,7 +67,7 @@ public class Staff extends Person{
                     choice = true;
                     break;
                 case 3:
-                    showStaffReport();
+                    showStaffReport(employees);
                     choice = true;
                     break;
                 case 4:
@@ -75,7 +80,7 @@ public class Staff extends Person{
         }while(choice);
     }
     
-    public void showStaffInfo(){
+    public void showStaffInfo(HashMap<String, StaffDB> employees){
         System.out.print("Enter Employee Name: ");
         String name = scanner.nextLine();
         if (employees.get(name) != null){
@@ -94,7 +99,7 @@ public class Staff extends Person{
         }
     }
     
-    public void showStaffReport(){
+    public void showStaffReport(HashMap<String, StaffDB> employees){
         Set<String> keySet = employees.keySet();
         System.out.println("----Staff Report----");           
         for (String key : keySet){
@@ -141,17 +146,6 @@ public class Staff extends Person{
         }
     }
     
-    public void addStaff(StaffDB staff){
-        employees.put(this.getName(), staff);
-    }
-    
-    public StaffDB getStaff(String name){
-        return employees.get(name);
-    }
-    
-    public void removeStaff(String name){
-        employees.remove(name);
-    }
     
     
 }
