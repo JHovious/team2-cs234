@@ -69,10 +69,11 @@ public class UserMenu {
                     
                     staff.showMenu(employees);
                     break;
-                //case 5:
-                    //PurchaseMenu purchaseMenu = new PurchaseMenu();
-                    //purchaseMenu.showPurchaseMenu();
-                    //break;
+                case 5:
+		    PurchaseMenu purchaseMenu = new PurchaseMenu();
+                    purchaseMenu.showPurchaseMenu();
+                    break;
+                    
                 case 6:
                     StoreInfo info = new StoreInfo();
                     info.showName();
