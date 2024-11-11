@@ -12,7 +12,7 @@ public class PurchaseMenu {
         items = itemsDB;
         scanner = new Scanner(System.in);
         // Initialize Purchase with dummy data or actual inventory
-        purchase = new Purchase("Sample", "001", 20, "100", "20");
+        purchase = new Purchase(items, "Sample", "001", 20, "100", "20");
     }
 
     public void showPurchaseMenu() {
