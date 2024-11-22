@@ -1,5 +1,0 @@
-Hovious_Justin
-
-Created the following classes: 
-Customer, EmployeeManager, Login, Staff, and Store
-
