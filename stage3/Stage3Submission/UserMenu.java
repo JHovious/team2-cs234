@@ -76,9 +76,7 @@ public class UserMenu {
                     
                 case 6:
                     StoreInfo info = new StoreInfo();
-                    info.showName();
-                    info.showAddress();
-                    info.showHours();
+                    info.showStoreInfoMenu();
 		    break;
                    
                 case 7:
