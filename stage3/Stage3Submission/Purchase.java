@@ -144,7 +144,7 @@ public class Purchase {
                 System.out.println("Item Price: $" + item.getPrice());
                 System.out.println("Item Quantity: " + item.getQuantity());
 
-                System.out.println("Enter quantity: ");
+                System.out.println("Enter quantity(put a - in front of the quantity): ");
                 quantity = scanner.nextInt();
 
                 if (quantity <= item.getQuantity()) {
