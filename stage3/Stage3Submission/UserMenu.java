@@ -70,7 +70,7 @@ public class UserMenu {
                     staff.showMenu(employees);
                     break;
                 //case 5:
-		    //PurchaseMenu purchaseMenu = new PurchaseMenu();
+		    //PurchaseMenu purchaseMenu = new PurchaseMenu(items);
                    // purchaseMenu.showPurchaseMenu();
                     //break;
                     
