@@ -1,32 +1,56 @@
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
-
+/*
+*Handles the purchase functionality of the system
+* Author: Maya Fisher
+*/
 public class Purchase {
 
-    private final String itemName;
-    private final String itemNumber;
-    private final float price;
-    private final String itemQuantity;
-    private final Inventory inventory;
-    private final ArrayList<InventoryDB> cart;
+    private  String itemName;
+    private  String itemNumber;
+    private float price;
+    private  String itemQuantity;
+    private HashMap<Integer,InventoryDB> items;
+    private HashMap <Integer, Integer>cart;
     private float subtotal;
 
-    /*
-     * Constructor
-     * @param Inventory inventory, String itemName, String itemNumber, float price, String itemQuantity
-     */
-    public Purchase(Inventory inventory, String itemName, String itemNumber, float price, String itemQuantity) {
-        this.inventory = inventory;
-        this.itemName = itemName;
-        this.itemNumber = itemNumber;
-        this.price = price;
-        this.itemQuantity = itemQuantity;
-        this.cart = new ArrayList<>();
+   /*
+    *Constructor intializing the items, cart hashmap, and subtotal.
+    * @param HashMap<Integer,InventoryDB> items
+    */
+    public Purchase(HashMap<Integer,InventoryDB> items) {
+        this.items = items; 
+        this.cart = new HashMap<>();
         this.subtotal = 0;
     }
-
-    public void getInventoryItems(Integer itemNumber) {
-        InventoryDB item = inventory.getItems().get(itemNumber);
+    
+    /*
+    *Used to select an item by item number from the hashmap. 
+    * Displays the items information. If the item is not found null is returned
+    * @param int itemNumber
+    * @return item or null  
+    */
+    public InventoryDB selectItem(int itemNumber) {
+        InventoryDB item = items.get(itemNumber);
+        if (item != null) {
+            System.out.println("You selected:");
+            System.out.println("Name: " + item.getName());
+            System.out.println("Price: $" + item.getPrice());
+            System.out.println("Quantity Available: " + item.getQuantity());
+            return item;
+        } else {
+            System.out.println("Invalid item number. Please try again.");
+            return null;
+        }
+    }
+    
+    /*
+    * gets an inventory item based off its item number and prints the items's information.
+    * If the item is not found, a message is printed.
+    * @param int itemNumber
+    */
+    public void getInventoryItems(int itemNumber) {
+        InventoryDB item = items.get(itemNumber);
         if (item != null) {
             System.out.println("Item Name: " + item.getName());
             System.out.println("Item Details: " + item.getDetails());
@@ -41,7 +65,8 @@ public class Purchase {
     public String getItem() {
         return itemName;
     }
-
+    
+     
     public void showItem() {
         System.out.println("Item Name: " + itemName);
         System.out.println("Item Number: " + itemNumber);
@@ -52,44 +77,49 @@ public class Purchase {
     public float getSubtotal() {
         return subtotal;
     }
-
-    public void removeItemQuantity(int itemNumber, int removeQuantity) {
-        InventoryDB item = inventory.getItems().get(itemNumber);
-        if (item != null) {
-            int currentQuantity = item.getQuantity();
-            if (removeQuantity <= currentQuantity) {
-                int newQuantity = currentQuantity - removeQuantity;
-                item.setQuantity(newQuantity);
-                System.out.println("The item has been removed successfully. New quantity: " + newQuantity);
-            } else {
-                System.out.println("Error. Cannot remove more items than available.");
-            }
-        } else {
+     /*
+      * Updates the item quantity in the inventory and the cart.
+      * @param int itemNumber, String newQuantity
+      */
+    public void updateItemQuantity(int itemNumber, String newQuantity) {
+        int newQuantityInt = Integer.parseInt(newQuantity);
+        InventoryDB item = items.get(itemNumber);
+        if(item == null) {
             System.out.println("Item not found in inventory.");
+            return;
         }
+        if(newQuantityInt < 0) {
+            System.out.println("Error. Quantity cannot be negative.");
+            return;
+
+        }
+         
+        // checks if the item exists and retrieves the current quantity. If it does not exist returns the default value 0.
+        int currentCartQuantity = cart.getOrDefault(itemNumber, 0);
+        int currentStock = item.getQuantity();
+        if(newQuantityInt > currentStock + currentCartQuantity) {
+            System.out.println("Error. Not enough stock to add to cart.");
+            return;
+        }
+
+        //updating inventory stock
+        item.setQuantity(currentStock - newQuantityInt + currentCartQuantity);
+        
+        //updating cart
+        if(newQuantityInt == 0) {
+            cart.remove(itemNumber);
+        }
+        else {
+            cart.put(itemNumber, newQuantityInt);
+        }
+
+        System.out.println("The item quantity has been updated in the cart. New cart quantity: " + newQuantity);
     }
 
-    public short updateItemQuantity(int itemNumber, String newQuantity) {
-        InventoryDB item = inventory.getItems().get(itemNumber);
-        if (item != null) {
-            int currentQuantity = item.getQuantity();
-            int quantityChange = Integer.parseInt(newQuantity);
-
-            if (currentQuantity + quantityChange < 0) {
-                System.out.println("Error. Cannot update quantity to a negative value.");
-                return 0;
-            } else {
-                currentQuantity += quantityChange;
-                item.setQuantity(currentQuantity);
-                System.out.println("The item quantity has been updated. New quantity: " + currentQuantity);
-                return (short) currentQuantity;
-            }
-        } else {
-            System.out.println("Item not found in inventory.");
-            return 0;
-        }
-    }
-
+    /*
+     * Completes the checkout process by getting items added to cary and putting the item
+     * quantity in the cart as well as updating the item quantity in the inventory.
+     */
     public void checkout() {
         Scanner scanner = new Scanner(System.in);
         int itemNumber;
@@ -97,14 +127,17 @@ public class Purchase {
         subtotal = 0;
 
         while (true) {
-            System.out.println("Enter item number to add to cart (1 for demonstration purposes)(or 0 to finish): ");
+
+            showInventory();
+
+            System.out.println("Enter item number to add to cart: ");
             itemNumber = scanner.nextInt();
 
             if (itemNumber == 0) {
                 break;
             }
 
-            InventoryDB item = inventory.getItems().get(itemNumber);
+            InventoryDB item = selectItem(itemNumber);
             if (item != null) {
                 System.out.println("Item Name: " + item.getName());
                 System.out.println("Item Number: " + itemNumber);
@@ -115,7 +148,7 @@ public class Purchase {
                 quantity = scanner.nextInt();
 
                 if (quantity <= item.getQuantity()) {
-                    cart.add(item);
+                    cart.put(itemNumber, quantity);
                     subtotal += Float.parseFloat(item.getPrice()) * quantity;
 
                     updateItemQuantity(itemNumber, String.valueOf(-quantity));
@@ -130,6 +163,10 @@ public class Purchase {
         System.out.println("Checkout complete. Subtotal: $" + subtotal);
     }
 
+    /*
+     * proccesses the payment 
+     * @param float total, String paymentType, String customerLookup, String rewardsLookup, float tax
+     */
     public void processPayment(float total, String paymentType, String customerLookup, String rewardsLookup, float tax) {
         Payment payment = new Payment(total, paymentType, customerLookup, rewardsLookup, tax);
 
@@ -140,6 +177,25 @@ public class Purchase {
             System.out.println("Payment processed successfully.");
         } else {
             System.out.println("Invalid payment type. Please try again.");
+        }
+    }
+    
+    /*
+     * Table for showing the inventory.
+     */
+    public void showInventory() {
+        System.out.println("======== Inventory ========");
+        System.out.println("Item # | Name       | Price | Quantity");
+
+        for (Integer key : items.keySet()) {
+            InventoryDB item = items.get(key);
+            System.out.printf(
+                "%-6d | %-15s | %-10.2f | %-10d%n",
+                key,                        //Item number
+                item.getName(),             
+                Float.parseFloat(item.getPrice()), 
+                item.getQuantity()          
+            );
         }
     }
 }
