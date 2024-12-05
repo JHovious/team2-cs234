@@ -1,30 +1,34 @@
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class PurchaseMenu {
 
     private boolean choice;
-    private final Scanner scanner;
-    private final  Purchase purchase;
+    private Scanner scanner;
+    private Purchase purchase;
+    private  HashMap<Integer,InventoryDB> items;
 
-    public PurchaseMenu(Inventory inventory) {
+    public PurchaseMenu( HashMap<Integer,InventoryDB> items) {
         scanner = new Scanner(System.in);
         choice = true;
-
+        this.items = items;
         // Initialize Purchase with actual inventory
-        purchase = new Purchase(inventory, "Sample Item", "001", 20.0f, "100");
+        purchase = new Purchase(items);
     }
 
     public void showPurchaseMenu() {
         do {
             System.out.println("======== Checkout ========");
             System.out.println("Subtotal: $" + purchase.getSubtotal());
-            System.out.println("(Enter item number '1' to add items)");
+            purchase.showInventory();
+            System.out.println("(Enter item number '1'to add items)");
             System.out.println("(Enter '0' when ready to checkout)");
             System.out.print("Enter your choice: ");
             int option = scanner.nextInt();
 
             switch (option) {
                 case 1:
+                    
                     purchase.checkout();
                     break;
                 case 0:
