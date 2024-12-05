@@ -16,7 +16,7 @@ public class InventoryDB {
     public InventoryDB(){
         this.name = "default";
         this.details = "No details";
-        this.price = "No price";
+        this.price = "50";
         this.quantity = 0;
         this.location = "Store";
         this.num = 1;
