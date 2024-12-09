@@ -8,6 +8,7 @@
  * @author iamth
  */
 import java.util.HashMap;
+import javax.swing.JOptionPane;
 
 public class UserMenuFrame extends javax.swing.JFrame {
 
@@ -16,26 +17,43 @@ public class UserMenuFrame extends javax.swing.JFrame {
      */
     
     //Instance Variables
-    private int option;
-    private boolean choice;
+
     private Staff staff;
     private HashMap<String, StaffDB> employees;
     private HashMap<Integer,InventoryDB> items;
     private HashMap<Integer,TicketDB> tickets;
     private Inventory item;
-    private Tickets ticket;
+    private TicketsMenu ticket;
+    private String userID;
+    private boolean manager;
+    
+    public UserMenuFrame(){
+        
+        employees = null;
+        staff = null;
+        items = null;
+        item = null;
+        tickets = null;
+        ticket = null;
+        userID = null;
+        manager = false;
+        initComponents();
+    }
     
     public UserMenuFrame(HashMap<String, StaffDB> employeesDB, 
-            HashMap<Integer,InventoryDB>itemsDB, Staff staff1,HashMap<Integer,TicketDB> ticketsDB) {
+            HashMap<Integer,InventoryDB>itemsDB, Staff staff1,HashMap<Integer,TicketDB> ticketsDB, String id, boolean managerCheck) {
         
-        option = 9; //Default number to be changed with working program
-        choice = true;
+        
+       
         employees = employeesDB;
         staff = staff1;
         items = itemsDB;
-        item = new Inventory(employees, staff, items);
+        manager = managerCheck;
+        item = new Inventory(employees, staff, items, manager);
         tickets = ticketsDB;
-        ticket = new Tickets(tickets);
+        ticket = new TicketsMenu(tickets, manager);
+        userID = id;
+        
         initComponents();
     }
 
@@ -57,7 +75,6 @@ public class UserMenuFrame extends javax.swing.JFrame {
         purchaseMenuButton = new javax.swing.JButton();
         storeInfoButton = new javax.swing.JButton();
         managerMenuButton = new javax.swing.JButton();
-        exitButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -106,11 +123,9 @@ public class UserMenuFrame extends javax.swing.JFrame {
         });
 
         managerMenuButton.setText("Manager Menu");
-
-        exitButton.setText("Exit");
-        exitButton.addActionListener(new java.awt.event.ActionListener() {
+        managerMenuButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitButtonActionPerformed(evt);
+                managerMenuButtonActionPerformed(evt);
             }
         });
 
@@ -123,14 +138,13 @@ public class UserMenuFrame extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, UserMenuPanelLayout.createSequentialGroup()
                         .addGap(123, 123, 123)
                         .addComponent(hardwareStoreLabel)
-                        .addGap(0, 91, Short.MAX_VALUE))
+                        .addGap(0, 542, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, UserMenuPanelLayout.createSequentialGroup()
                         .addGap(32, 32, 32)
                         .addGroup(UserMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(UserMenuPanelLayout.createSequentialGroup()
                                 .addComponent(purchaseMenuButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(exitButton))
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(UserMenuPanelLayout.createSequentialGroup()
                                 .addGroup(UserMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(staffMenuButton)
@@ -164,15 +178,8 @@ public class UserMenuFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(staffMenuButton)
                 .addGap(2, 2, 2)
-                .addGroup(UserMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(UserMenuPanelLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(purchaseMenuButton)
-                        .addContainerGap(24, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, UserMenuPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(exitButton)
-                        .addGap(36, 36, 36))))
+                .addComponent(purchaseMenuButton)
+                .addContainerGap(239, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -186,15 +193,15 @@ public class UserMenuFrame extends javax.swing.JFrame {
             .addComponent(UserMenuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        pack();
+        setBounds(0, 0, 865, 506);
     }// </editor-fold>                        
 
     private void ticketsMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
-        ticket.showTicketMenu();
+        new TicketsMenu(tickets, manager).setVisible(true);
     }                                                 
 
     private void inventoryMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                    
-        item.showInventoryMenu(userID);
+        new Inventory(employees, staff, items, manager).setVisible(true);
     }                                                   
 
     private void customerMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                   
@@ -213,15 +220,17 @@ public class UserMenuFrame extends javax.swing.JFrame {
         
     }                                               
 
-    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        Login exit = new Login();
-        //Logout
-        exit.performLogin();
-    }                                          
-
     private void purchaseMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                   
         // TODO add your handling code here:
     }                                                  
+
+    private void managerMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
+        if(manager){
+            new ManagerMenu(employees).setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(this, "Invalid Credentials");
+        }
+    }                                                 
 
     /**
      * @param args the command line arguments
@@ -261,7 +270,6 @@ public class UserMenuFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify                     
     private javax.swing.JPanel UserMenuPanel;
     private javax.swing.JButton customerMenuButton;
-    private javax.swing.JButton exitButton;
     private javax.swing.JLabel hardwareStoreLabel;
     private javax.swing.JButton inventoryMenuButton;
     private javax.swing.JButton managerMenuButton;
