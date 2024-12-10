@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author iamth
+ * Christian Kurdi
  */
 public class ManagerMenu extends javax.swing.JFrame {
     HashMap<String, StaffDB> employees;
