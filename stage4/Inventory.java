@@ -34,7 +34,7 @@ public class Inventory extends javax.swing.JFrame {
         
     }
     
-    public Inventory(HashMap<String, StaffDB> employees, Staff staff,HashMap<Integer,InventoryDB>itemsDB, boolean managerCheck){
+    public Inventory(HashMap<String, StaffDB> employees,HashMap<Integer,InventoryDB>itemsDB, boolean managerCheck){
         emp = employees;
         manager = managerCheck;
         items = itemsDB;
