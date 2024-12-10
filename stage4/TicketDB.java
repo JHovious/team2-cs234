@@ -7,8 +7,6 @@
  * Version: 1.2
  */
 
-import java.util.Scanner;
-
 
 public class TicketDB {
     
@@ -16,8 +14,6 @@ public class TicketDB {
     
     private String ticketMessage, ticketSubject, ticketPriority, ticketRecipient;
     private int ticketNum;
-    private Scanner sc;
-    private Scanner numScan;
     
     
     //Constructor
@@ -28,8 +24,6 @@ public class TicketDB {
         this.ticketPriority = "default";
         this.ticketRecipient = "Manager";
         this.ticketNum = 1;
-        sc = new Scanner(System.in);
-        numScan = new Scanner(System.in);
         
     }
     
