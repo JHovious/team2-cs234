@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author iamth
+ * Christian Kurdi
  */
 public class TicketsMenu extends javax.swing.JFrame {
 
