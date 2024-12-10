@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author iamth
+ * Christian Kurdi
  */
 
 public class Inventory extends javax.swing.JFrame {
