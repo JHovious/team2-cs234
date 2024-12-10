@@ -24,13 +24,11 @@ public class Inventory extends javax.swing.JFrame {
     private Integer itemNum = 1;
     private HashMap<Integer,InventoryDB> items;
     private HashMap<String, StaffDB> emp;
-    private InventoryDB testDB;
     private boolean manager;
     
     
     public Inventory(){
         items = null;
-        testDB = null;
         manager = false;
         emp = null;
         
