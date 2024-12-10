@@ -6,7 +6,6 @@
  *
  * Christian Kurdi
  */
-import java.util.Scanner;
 
 public class StaffDB {
     
