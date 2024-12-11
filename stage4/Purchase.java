@@ -62,9 +62,11 @@ public class Purchase {
         }
     }
 
-    public String getItem() {
+    public String getItemName() {
         return itemName;
     }
+    
+    
     
      
     public void showItem() {
@@ -213,4 +215,6 @@ public class Purchase {
          return tax;
          
      }
+     
+     
 }
