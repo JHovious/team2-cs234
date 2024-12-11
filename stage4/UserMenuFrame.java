@@ -201,7 +201,7 @@ public class UserMenuFrame extends javax.swing.JFrame {
     }                                                 
 
     private void inventoryMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                    
-        new Inventory(employees, staff, items, manager).setVisible(true);
+        new Inventory(employees, items, manager).setVisible(true);
     }                                                   
 
     private void customerMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                   
