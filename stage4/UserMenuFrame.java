@@ -49,7 +49,7 @@ public class UserMenuFrame extends javax.swing.JFrame {
         staff = staff1;
         items = itemsDB;
         manager = managerCheck;
-        item = new Inventory(employees, staff, items, manager);
+        item = new Inventory(employees, items, manager);
         tickets = ticketsDB;
         ticket = new TicketsMenu(tickets, manager);
         userID = id;
