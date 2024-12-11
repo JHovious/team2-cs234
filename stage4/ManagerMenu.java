@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  * Christian Kurdi
  */
 public class ManagerMenu extends javax.swing.JFrame {
-    HashMap<String, StaffDB> employees;
+    private HashMap<String, StaffDB> employees;
     
     /**
      * Creates new form ManagerMenu
