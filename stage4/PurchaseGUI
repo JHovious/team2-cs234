@@ -35,7 +35,7 @@ public class PurchaseGUI extends javax.swing.JFrame {
      */
     public PurchaseGUI(HashMap<Integer,InventoryDB> items) {
         this.items = items;
-        //items = purchase.getItems();
+        items = purchase.getItems();
         dataName = "inventorydata.csv";
          initComponents();
  
@@ -266,11 +266,11 @@ catch (Exception e) {
             float subtotal = (float) (price * quantity);
             purchase.setSubtotal(subtotal);
             
-            Integer itemNumber = Integer.valueOf(InventoryTable.getValueAt(selectedRow, 4).toString());
-            int current = items.get(itemNumber).getQuantity();
-            int currentQuant = current - quantity;
-            InventoryTable.setValueAt(currentQuant, selectedRow, 2);
-            items.get(itemNumber).setQuantity(currentQuant);
+            //Integer itemNumber = Integer.valueOf(InventoryTable.getValueAt(selectedRow, 4).toString());
+            //int current = items.get(itemNumber).getQuantity();
+            //int currentQuant = current - quantity;
+            //InventoryTable.setValueAt(currentQuant, selectedRow, 2);
+            //items.get(itemNumber).setQuantity(currentQuant);
             //InventoryTable.setValueAt(String.format("%.2f", subtotal), selectedRow, 3); 
             
             String itemName = InventoryTable.getValueAt(selectedRow, 0).toString();
@@ -352,3 +352,4 @@ catch (Exception e) {
     private javax.swing.JTextField subtotalTextField;
     // End of variables declaration                   
 }
+
