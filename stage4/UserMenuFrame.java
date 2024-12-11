@@ -5,7 +5,7 @@
 
 /**
  *
- * @author iamth
+ * Christian Kurdi
  */
 import java.util.HashMap;
 import javax.swing.JOptionPane;
