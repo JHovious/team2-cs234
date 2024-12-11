@@ -24,7 +24,7 @@ public class ManagerMenu extends javax.swing.JFrame {
      * Creates new form ManagerMenu
      */
     public ManagerMenu() {
-        
+        employees = null;
     }
     
     public ManagerMenu(HashMap<String, StaffDB> employeesDB){
