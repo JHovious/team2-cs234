@@ -205,11 +205,11 @@ public class UserMenuFrame extends javax.swing.JFrame {
     }                                                   
 
     private void customerMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                   
-        
+        new CustomerFrame().setVisible(true);
     }                                                  
 
     private void staffMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                
-        staff.showMenu(employees);
+        new StaffFrame(employees).setVisible(true);
     }                                               
 
     private void storeInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                
