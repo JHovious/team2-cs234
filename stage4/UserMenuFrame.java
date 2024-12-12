@@ -241,7 +241,7 @@ public class UserMenuFrame extends javax.swing.JFrame {
     }                                                 
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {                                  
-        try{
+            try{
                 //Gets data from file
                 BufferedReader reader = new BufferedReader(new FileReader("ticketdata.csv"));
                 ArrayList<String> tableInfo = new ArrayList<>();
@@ -262,6 +262,51 @@ public class UserMenuFrame extends javax.swing.JFrame {
             }catch(Exception e){
             System.out.println("Error");
             }
+            try{
+            //Gets data from file
+            BufferedReader reader = new BufferedReader(new FileReader("employeedata.csv"));
+            ArrayList<String> tableInfo = new ArrayList<>();
+            String line;
+            
+            while ((line = reader.readLine()) != null){
+                tableInfo.add(line);
+            }
+            reader.close();
+            
+            for(String rowInfo : tableInfo){
+                String[] row = rowInfo.split(",");
+
+                StaffDB staff = new StaffDB(row[0], row[1], row[2], row[3], row[4], row[5], 
+                        Integer.valueOf(row[6]), Integer.valueOf(row[7]), Integer.valueOf(row[8]));
+                employees.put(row[0], staff);
+
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Staff info not read correctly");
+        }
+            
+        try{
+            //Gets data from file
+            BufferedReader reader = new BufferedReader(new FileReader("inventorydata.csv"));
+            ArrayList<String> tableInfo = new ArrayList<>();
+            String line;
+            
+            while ((line = reader.readLine()) != null){
+                tableInfo.add(line);
+            }
+            reader.close();
+            
+            //Put data in table
+            
+            for(String rowInfo : tableInfo){
+                String[] row = rowInfo.split(",");
+
+                InventoryDB item = new InventoryDB(Integer.valueOf(row[4]), row[0], row[5], row[1], Integer.valueOf(row[2]), row[3]);
+                items.put(Integer.valueOf(row[4]), item);
+            }
+        }catch(Exception e){
+            System.out.println("Error");
+        }
     }                                 
 
     /**
