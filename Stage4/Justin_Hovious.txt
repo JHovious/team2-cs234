@@ -1,0 +1,1 @@
+I did the GUI for the Login page, Customer, Staff, and all GUI's contained within those classes. I also did the design work and combined all files into the executable.  
