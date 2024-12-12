@@ -12,17 +12,16 @@ public class StaffFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form StaffFrame
-     * @param employees
      */
-    public StaffFrame(HashMap<String, StaffDB> employees) {
-        this.employees = employees;
-        this.staff = new Staff(employees);
-        if (this.staff != null) {
-
-        }
-        this.employees = employees;
-        this.staff = new Staff(employees);
+    public StaffReportFrame() {
         initComponents();
+    }
+    public StaffFrame(HashMap<String, StaffDB> employees) {
+        this.staff = staff;
+        this.employees = employees != null ? employees : new HashMap<>();
+        initComponents();
+        populateStaffReport();
+        
     }
 
     /**
