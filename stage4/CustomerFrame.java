@@ -20,12 +20,12 @@ public class CustomerFrame extends javax.swing.JFrame {
      * Creates new form NewJFrame
      */
     public CustomerFrame() {
-        this.name = name;
+        this.name = null;
         this.option = 9;
         this.choice = true;
-        this.phoneNumber = phoneNumber;
-        this.rewardNumber = rewardNumber;
-        this.rewardPoint = rewardPoint;
+        this.phoneNumber = null;
+        this.rewardNumber = 1;
+        this.rewardPoint = 1;
         customerDataBase.add(this.Customer); 
         initComponents();
     }
