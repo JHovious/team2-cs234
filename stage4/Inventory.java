@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * Christian Kurdi
+ * @author iamth
  */
 
 public class Inventory extends javax.swing.JFrame {
@@ -320,30 +320,14 @@ public class Inventory extends javax.swing.JFrame {
     }                                       
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {                                  
-        try{
-            //Gets data from file
-            BufferedReader reader = new BufferedReader(new FileReader("inventorydata.csv"));
-            ArrayList<String> tableInfo = new ArrayList<>();
-            String line;
+        
+        DefaultTableModel model = (DefaultTableModel)tblItems.getModel();
+        for(int key : items.keySet()){
             
-            while ((line = reader.readLine()) != null){
-                tableInfo.add(line);
-            }
-            reader.close();
-            
-            //Put data in table
-            DefaultTableModel model = (DefaultTableModel)tblItems.getModel();
-            for(String rowInfo : tableInfo){
-                String[] row = rowInfo.split(",");
-
-                InventoryDB item = new InventoryDB(Integer.valueOf(row[4]), row[0], row[5], row[1], Integer.valueOf(row[2]), row[3]);
-                items.put(Integer.valueOf(row[4]), item);
-                String[] newRow = new String[] {row[0], row[1], row[2], row[3], row[4]};
-                model.addRow(newRow);
-            }
-        }catch(Exception e){
-            System.out.println("Error");
+            String[] newRow = new String[] {items.get(key).getName(), items.get(key).getPrice(), String.valueOf(items.get(key).getQuantity()), items.get(key).getLocation(), String.valueOf(key)};
+            model.addRow(newRow);
         }
+        
     }                                 
 
     private void tblItemsMouseClicked(java.awt.event.MouseEvent evt) {                                      
