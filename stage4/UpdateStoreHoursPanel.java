@@ -272,15 +272,15 @@ public class UpdateStoreHoursPanel extends javax.swing.JFrame {
     }                                                         
 
     private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
-         // Get the table model
+         
         DefaultTableModel model = (DefaultTableModel) UpdateStoreHoursInfoTable.getModel();
 
-    // Get input from text fields
+    
         String newName = UpdateStoreNameTextField.getText();
         String newAddress = UpdateAddressTextField.getText();
         String newHours = updateStoreHoursTextField.getText();
 
-    // Validate inputs
+   
         if (newName.isEmpty() || newAddress.isEmpty() || newHours.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please fill out all fields!");
             return;
@@ -295,15 +295,15 @@ public class UpdateStoreHoursPanel extends javax.swing.JFrame {
         System.out.println("Updated Address: " + info.getAddress());
         System.out.println("Updated Hours: " + info.getHours());
 
-    // Update table rows directly (assuming rows 4, 5, and 6 hold the relevant data)
+    
         model.setValueAt(newName, 0, 0);  // Update name at row 4, column 0
         model.setValueAt(newAddress, 1, 0);
         model.setValueAt(newHours, 2, 0);  // Update hours at row 6, column 0
 
-    // Optional: Repaint the table to reflect changes
+    
         UpdateStoreHoursInfoTable.repaint();
 
-    // Show success message
+   
         JOptionPane.showMessageDialog(this, "Table updated successfully!");
         
             //updateTableData(model, info, newName, newAddress, newHours);
@@ -321,13 +321,13 @@ public class UpdateStoreHoursPanel extends javax.swing.JFrame {
         String address = info.getAddress();
         String hours = info.getHours();
         
-        // Create a single row string with new lines between data
+        
         String row = name + "\n" + address + "\n" + hours;
         data.add(row);
 
         System.out.println(data);
 
-        // Write the data to a file (overwrite the existing data)
+        
         try (PrintWriter writer = new PrintWriter(new FileWriter(dataName))) {  
             for (String rowData : data) {
                 writer.println(rowData);  
@@ -350,7 +350,7 @@ public class UpdateStoreHoursPanel extends javax.swing.JFrame {
                                            String nameText, String addressText, String hoursText) {
     DefaultTableModel model = theModel;
 
-    // Update specific rows directly based on input text
+    
     model.setValueAt(nameText, 4, 0); 
     model.setValueAt(addressText, 5, 0);  
     model.setValueAt(hoursText, 6, 0);  
