@@ -5,8 +5,11 @@
 
 /**
  *
- * Christian Kurdi
+ * @author iamth
  */
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
 
@@ -77,6 +80,11 @@ public class UserMenuFrame extends javax.swing.JFrame {
         managerMenuButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         hardwareStoreLabel.setText("Hardware Store User Menu");
 
@@ -205,11 +213,11 @@ public class UserMenuFrame extends javax.swing.JFrame {
     }                                                   
 
     private void customerMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                   
-        new CustomerFrame().setVisible(true);
+        
     }                                                  
 
     private void staffMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                
-        new StaffFrame(employees).setVisible(true);
+        staff.showMenu(employees);
     }                                               
 
     private void storeInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                
@@ -221,7 +229,7 @@ public class UserMenuFrame extends javax.swing.JFrame {
     }                                               
 
     private void purchaseMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                   
-        // TODO add your handling code here:
+        new PurchaseGUI(items).setVisible(true);
     }                                                  
 
     private void managerMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
@@ -231,6 +239,30 @@ public class UserMenuFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Invalid Credentials");
         }
     }                                                 
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {                                  
+        try{
+                //Gets data from file
+                BufferedReader reader = new BufferedReader(new FileReader("ticketdata.csv"));
+                ArrayList<String> tableInfo = new ArrayList<>();
+                String line;
+
+                while ((line = reader.readLine()) != null){
+                    tableInfo.add(line);
+                }
+                reader.close();
+                //Put data in table
+                for(String rowInfo : tableInfo){
+                    String[] row = rowInfo.split(",");
+
+                    TicketDB ticket = new TicketDB(Integer.valueOf(row[0]), row[1], row[2], row[3], row[4]);
+                    tickets.put(Integer.valueOf(row[0]), ticket);
+            }
+            
+            }catch(Exception e){
+            System.out.println("Error");
+            }
+    }                                 
 
     /**
      * @param args the command line arguments
