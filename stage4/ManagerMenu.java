@@ -15,10 +15,10 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * Christian Kurdi
+ * @author iamth
  */
 public class ManagerMenu extends javax.swing.JFrame {
-    private HashMap<String, StaffDB> employees;
+    HashMap<String, StaffDB> employees;
     
     /**
      * Creates new form ManagerMenu
@@ -305,31 +305,12 @@ public class ManagerMenu extends javax.swing.JFrame {
     }                                     
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {                                  
-        try{
-            //Gets data from file
-            BufferedReader reader = new BufferedReader(new FileReader("employeedata.csv"));
-            ArrayList<String> tableInfo = new ArrayList<>();
-            String line;
+        DefaultTableModel model = (DefaultTableModel)tblStaff.getModel();
+        for(String key : employees.keySet()){
             
-            while ((line = reader.readLine()) != null){
-                tableInfo.add(line);
-            }
-            reader.close();
-            
-            //Put data in table
-            DefaultTableModel model = (DefaultTableModel)tblStaff.getModel();
-            for(String rowInfo : tableInfo){
-                String[] row = rowInfo.split(",");
-
-                StaffDB staff = new StaffDB(row[0], row[1], row[2], row[3], row[4], row[5], 
-                        Integer.valueOf(row[6]), Integer.valueOf(row[7]), Integer.valueOf(row[8]));
-                employees.put(row[0], staff);
-                String[] newRow = new String[] {row[0], row[3], row[1]};
-                model.addRow(newRow);
-            }
-        }catch(Exception e){
-            System.out.println("Error");
-        }
+            String[] newRow = new String[] {key, employees.get(key).getTitle(), employees.get(key).getEmployeeId()};
+            model.addRow(newRow);
+        }    
     }                                 
 
     private void clearFields(){
@@ -475,7 +456,7 @@ public class ManagerMenu extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
+                if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
