@@ -1,1 +1,0 @@
-To run our program, first navigate to the folder that contains all the program files. Double click on the jar file to run the program.

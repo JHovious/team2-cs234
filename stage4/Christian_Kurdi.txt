@@ -1,1 +1,0 @@
-I made the Tickets menu, inventory menu, and manager menu, and started the User menu for a GUI. I also updated StaffDB, TicketDB, and Inventory DB.
