@@ -1,1 +1,2 @@
 I did updates to purchase and Store Info as well as Purchase GUI and the Store Info GUI
+-contributed to the User Guide in User menu, Store info, Customer Menu, Staff Menu, Purchase Menu
