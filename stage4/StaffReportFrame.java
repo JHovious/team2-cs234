@@ -142,7 +142,7 @@ public class StaffReportFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new StaffReportFrame(staff, employees).setVisible(true);
+                new StaffReportFrame().setVisible(true);
             }
         });
     }
